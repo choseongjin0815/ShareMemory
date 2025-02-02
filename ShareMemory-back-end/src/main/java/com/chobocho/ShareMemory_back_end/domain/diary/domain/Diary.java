@@ -1,9 +1,11 @@
 package com.chobocho.ShareMemory_back_end.domain.diary.domain;
 
+import com.chobocho.ShareMemory_back_end.domain.user.domain.User;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name="tbl_diary")
@@ -25,5 +27,8 @@ public class Diary {
 
     private int totalView;
 
+    @ManyToOne
+    @JoinColumn(name="user_id")
+    private User user;
 
 }
