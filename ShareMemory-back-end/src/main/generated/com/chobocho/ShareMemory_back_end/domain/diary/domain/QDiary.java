@@ -7,6 +7,7 @@ import com.querydsl.core.types.dsl.*;
 import com.querydsl.core.types.PathMetadata;
 import javax.annotation.processing.Generated;
 import com.querydsl.core.types.Path;
+import com.querydsl.core.types.dsl.PathInits;
 
 
 /**
@@ -16,6 +17,8 @@ import com.querydsl.core.types.Path;
 public class QDiary extends EntityPathBase<Diary> {
 
     private static final long serialVersionUID = -1084436208L;
+
+    private static final PathInits INITS = PathInits.DIRECT2;
 
     public static final QDiary diary = new QDiary("diary");
 
@@ -29,16 +32,27 @@ public class QDiary extends EntityPathBase<Diary> {
 
     public final NumberPath<Integer> totalView = createNumber("totalView", Integer.class);
 
+    public final com.chobocho.ShareMemory_back_end.domain.user.domain.QUser user;
+
     public QDiary(String variable) {
-        super(Diary.class, forVariable(variable));
+        this(Diary.class, forVariable(variable), INITS);
     }
 
     public QDiary(Path<? extends Diary> path) {
-        super(path.getType(), path.getMetadata());
+        this(path.getType(), path.getMetadata(), PathInits.getFor(path.getMetadata(), INITS));
     }
 
     public QDiary(PathMetadata metadata) {
-        super(Diary.class, metadata);
+        this(metadata, PathInits.getFor(metadata, INITS));
+    }
+
+    public QDiary(PathMetadata metadata, PathInits inits) {
+        this(Diary.class, metadata, inits);
+    }
+
+    public QDiary(Class<? extends Diary> type, PathMetadata metadata, PathInits inits) {
+        super(type, metadata, inits);
+        this.user = inits.isInitialized("user") ? new com.chobocho.ShareMemory_back_end.domain.user.domain.QUser(forProperty("user")) : null;
     }
 
 }
