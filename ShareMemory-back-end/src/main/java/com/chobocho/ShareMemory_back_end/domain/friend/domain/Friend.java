@@ -2,20 +2,19 @@ package com.chobocho.ShareMemory_back_end.domain.friend.domain;
 
 import com.chobocho.ShareMemory_back_end.domain.user.domain.User;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Table(name="tbl_friend")
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 @Getter
+@ToString
+@Builder
 public class Friend {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,9 +28,8 @@ public class Friend {
     @JoinColumn(name="to_user_id")
     private User toUserId;
 
-    @ElementCollection(fetch = FetchType.LAZY)
-    @Builder.Default
-    private List<FriendStatus> friendStatusList = new ArrayList<>();
+    @Enumerated(EnumType.STRING)
+    private FriendStatus friendStatus;
 
     private LocalDate regDate;
 }

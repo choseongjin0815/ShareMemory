@@ -24,7 +24,7 @@ public class QFriend extends EntityPathBase<Friend> {
 
     public final NumberPath<Long> friendId = createNumber("friendId", Long.class);
 
-    public final ListPath<FriendStatus, EnumPath<FriendStatus>> friendStatusList = this.<FriendStatus, EnumPath<FriendStatus>>createList("friendStatusList", FriendStatus.class, EnumPath.class, PathInits.DIRECT2);
+    public final EnumPath<FriendStatus> friendStatus = createEnum("friendStatus", FriendStatus.class);
 
     public final com.chobocho.ShareMemory_back_end.domain.user.domain.QUser fromUserId;
 

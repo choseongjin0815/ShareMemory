@@ -23,6 +23,15 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    public User deleteUser(String userId) {
+        User user = userRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("Not Found User"));
+
+        userRepository.delete(user);
+
+        return user;
+    }
+
+    @Override
     public UserDTO get(String userId) {
         return null;
     }

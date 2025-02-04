@@ -26,6 +26,8 @@ public class QDiary extends EntityPathBase<Diary> {
 
     public final NumberPath<Long> dno = createNumber("dno", Long.class);
 
+    public final ListPath<DiaryImages, QDiaryImages> imageList = this.<DiaryImages, QDiaryImages>createList("imageList", DiaryImages.class, QDiaryImages.class, PathInits.DIRECT2);
+
     public final DatePath<java.time.LocalDate> regDate = createDate("regDate", java.time.LocalDate.class);
 
     public final StringPath title = createString("title");

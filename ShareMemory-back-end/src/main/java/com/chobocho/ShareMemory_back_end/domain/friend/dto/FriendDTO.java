@@ -25,5 +25,5 @@ public class FriendDTO {
     private String toUserId;
 
 
-    private List<String> friendStatusList = new ArrayList<>();
+    private FriendStatus friendStatus;
 }
