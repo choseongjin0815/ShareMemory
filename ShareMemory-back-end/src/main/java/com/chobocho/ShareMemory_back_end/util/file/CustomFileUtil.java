@@ -1,4 +1,4 @@
-package com.chobocho.ShareMemory_back_end.util;
+package com.chobocho.ShareMemory_back_end.util.file;
 
 
 import jakarta.annotation.PostConstruct;
@@ -112,6 +112,7 @@ public class CustomFileUtil {
             }catch(IOException e) {
                 throw new RuntimeException(e.getMessage());
             }
+
         });
 
 

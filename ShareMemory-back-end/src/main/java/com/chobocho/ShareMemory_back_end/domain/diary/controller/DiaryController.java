@@ -1,9 +1,8 @@
 package com.chobocho.ShareMemory_back_end.domain.diary.controller;
 
-import com.chobocho.ShareMemory_back_end.domain.diary.domain.Diary;
 import com.chobocho.ShareMemory_back_end.domain.diary.dto.DiaryDTO;
 import com.chobocho.ShareMemory_back_end.domain.diary.service.DiaryService;
-import com.chobocho.ShareMemory_back_end.util.CustomFileUtil;
+import com.chobocho.ShareMemory_back_end.util.file.CustomFileUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.core.io.Resource;
