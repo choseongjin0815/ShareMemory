@@ -3,6 +3,8 @@ package com.chobocho.ShareMemory_back_end.domain.diary.controller;
 import com.chobocho.ShareMemory_back_end.domain.diary.dto.DiaryDTO;
 import com.chobocho.ShareMemory_back_end.domain.diary.service.DiaryService;
 import com.chobocho.ShareMemory_back_end.util.file.CustomFileUtil;
+import com.chobocho.ShareMemory_back_end.util.pagination.PageRequestDTO;
+import com.chobocho.ShareMemory_back_end.util.pagination.PageResponseDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.core.io.Resource;
@@ -105,4 +107,14 @@ public class DiaryController {
             customFileUtil.deleteFiles(removeFiles);
         }
         return Map.of("RESULT", "SUCCESS");
-    }}
+    }
+
+    @GetMapping("/list")
+    public PageResponseDTO<DiaryDTO> list (PageRequestDTO pageRequestDTO) {
+
+        log.info(pageRequestDTO);
+
+        return diaryService.list(pageRequestDTO);
+    }
+}
+

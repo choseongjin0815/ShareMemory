@@ -9,7 +9,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @Getter
 @Setter
-public class PageRequestDTO<E> {
+public class PageRequestDTO {
 
     @Builder.Default
     private int page = 1;

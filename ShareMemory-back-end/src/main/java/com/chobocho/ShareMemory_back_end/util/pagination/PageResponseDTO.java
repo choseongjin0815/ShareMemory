@@ -1,6 +1,7 @@
 package com.chobocho.ShareMemory_back_end.util.pagination;
 
 
+import lombok.Builder;
 import lombok.Data;
 
 import java.util.List;
@@ -20,8 +21,7 @@ public class PageResponseDTO<E> {
 
     private int totalCount, prevPage, nextPage, totalPage, current;
 
-
-
+    @Builder(builderMethodName = "withAll")
     public PageResponseDTO(List<E> dtoList, PageRequestDTO pageRequestDTO, long totalCount) {
         this.dtoList = dtoList;
 
@@ -42,7 +42,6 @@ public class PageResponseDTO<E> {
         this.prev = start > 1;
 
         this.next  = totalCount > end * pageRequestDTO.getSize();
-
 
         this.pageNumList = IntStream.rangeClosed(start, end).boxed().collect(Collectors.toList());
 

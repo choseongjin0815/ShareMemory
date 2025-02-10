@@ -1,6 +1,7 @@
 package com.chobocho.ShareMemory_back_end.domain.user.service;
 
 import com.chobocho.ShareMemory_back_end.domain.user.domain.User;
+import com.chobocho.ShareMemory_back_end.domain.user.domain.UserStatus;
 import com.chobocho.ShareMemory_back_end.domain.user.dto.UserDTO;
 import com.chobocho.ShareMemory_back_end.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -24,15 +25,25 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public User deleteUser(String userId) {
-        User user = userRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("Not Found User"));
+        User user = userRepository.findById(userId).orElse(null);
 
-        userRepository.delete(user);
+        user.setUserStatus(UserStatus.INACTIVE);
 
-        return user;
+        return userRepository.save(user);
     }
 
     @Override
     public UserDTO get(String userId) {
-        return null;
+        User user = userRepository.findById(userId).orElse(null);
+
+        UserDTO userDTO = user.entityToDTO();
+        return userDTO;
+    }
+
+    @Override
+    public void modifyNickname(UserDTO userDTO) {
+        User user = userRepository.findById(userDTO.getUserId()).orElse(null);
+        user.setNickname(userDTO.getNickname());
+        userRepository.save(user);
     }
 }

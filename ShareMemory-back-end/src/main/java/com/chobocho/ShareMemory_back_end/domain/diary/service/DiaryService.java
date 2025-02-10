@@ -2,6 +2,8 @@ package com.chobocho.ShareMemory_back_end.domain.diary.service;
 
 import com.chobocho.ShareMemory_back_end.domain.diary.domain.Diary;
 import com.chobocho.ShareMemory_back_end.domain.diary.dto.DiaryDTO;
+import com.chobocho.ShareMemory_back_end.util.pagination.PageRequestDTO;
+import com.chobocho.ShareMemory_back_end.util.pagination.PageResponseDTO;
 
 public interface DiaryService {
 
@@ -12,4 +14,6 @@ public interface DiaryService {
     Diary deleteDiary(Long dno);
 
     void modifyDiary(DiaryDTO diaryDTO);
+
+    PageResponseDTO<DiaryDTO> list(PageRequestDTO pageRequestDTO);
 }

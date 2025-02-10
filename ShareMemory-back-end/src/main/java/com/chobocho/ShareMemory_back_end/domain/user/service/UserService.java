@@ -9,6 +9,10 @@ public interface UserService {
     //조회
     UserDTO get(String userId);
 
+    //user의 상태를 INACTIVE로 변환
     User deleteUser(String userId);
+
+    void modifyNickname(UserDTO userDTO);
+
 
 }

@@ -3,6 +3,8 @@ package com.chobocho.ShareMemory_back_end.service;
 import com.chobocho.ShareMemory_back_end.domain.diary.domain.Diary;
 import com.chobocho.ShareMemory_back_end.domain.diary.dto.DiaryDTO;
 import com.chobocho.ShareMemory_back_end.domain.diary.service.DiaryService;
+import com.chobocho.ShareMemory_back_end.util.pagination.PageRequestDTO;
+import com.chobocho.ShareMemory_back_end.util.pagination.PageResponseDTO;
 import jakarta.transaction.Transactional;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;
@@ -38,5 +40,15 @@ public class DiaryServiceTest {
     public void diaryGetTest() {
         DiaryDTO diaryDTO = diaryService.getDiary(2L);
         log.info(diaryDTO);
+    }
+
+    @Test
+    public void diaryListTest() {
+        PageRequestDTO pageRequestDTO = new PageRequestDTO();
+
+
+        PageResponseDTO<DiaryDTO> responseDTO = diaryService.list(pageRequestDTO);
+
+        log.info(responseDTO);
     }
 }
