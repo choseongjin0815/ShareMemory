@@ -11,12 +11,15 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDate;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Map;
 
 @Log4j2
@@ -70,7 +73,10 @@ public class JWTCheckFilter extends OncePerRequestFilter {
             LocalDate regDate = (LocalDate)claims.get("regDate");
             UserStatus userStatus = (UserStatus)claims.get("userStatus");
 
-            UserDTO userDTO = new UserDTO(userId, pwd, nickname, regDate, userStatus);
+            Collection<GrantedAuthority> authorities = Collections.emptyList();
+
+
+            UserDTO userDTO = new UserDTO(userId, pwd, nickname, regDate, userStatus, authorities);
 
             log.info("============================");
             log.info(userDTO);
@@ -80,7 +86,7 @@ public class JWTCheckFilter extends OncePerRequestFilter {
 
             // 객체는 사용자의 인증 정보를 담고 있는 객체로, 인증과 권한 정보를 포함하여 Spring Security에서 인증을 처리하는 데 사용
             UsernamePasswordAuthenticationToken authenticationToken =
-                    new UsernamePasswordAuthenticationToken(userDTO, pwd);
+                    new UsernamePasswordAuthenticationToken(userDTO, pwd, userDTO.getAuthorities());
 
 
             //인증 토큰(authenticationToken)을 SecurityContext에 설정하여, 현재 요청에서 인증된 사용자 정보를 유지

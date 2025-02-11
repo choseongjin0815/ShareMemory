@@ -3,9 +3,12 @@ package com.chobocho.ShareMemory_back_end.domain.user.domain;
 import com.chobocho.ShareMemory_back_end.domain.user.dto.UserDTO;
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 @Entity
@@ -32,14 +35,20 @@ public class User {
 
 
     public UserDTO entityToDTO() {
-        return UserDTO.builder()
-                .userId(this.userId)
-                .regDate(this.regDate)
-                .nickname(this.nickname)
-                .userStatus(this.userStatus)
-                .build();
+
+        // 권한이 없으므로 빈 리스트 전달
+        Collection<GrantedAuthority> authorities = Collections.emptyList();
+
+        return new UserDTO(
+                this.userId,
+                this.pwd,
+                this.nickname,
+                this.regDate,
+                this.userStatus,
+                authorities
+        );
     }
 
-    
+
 
 }
