@@ -1,10 +1,10 @@
-import logo from './logo.svg';
 import './App.css';
-import ListComponent from './components/diary/ListComponent';
+import root from './router/root';
+import { RouterProvider } from 'react-router-dom';
 
 function App() {
   return (
-    <div></div>
+    <RouterProvider router={root}/>
   );
 }
 

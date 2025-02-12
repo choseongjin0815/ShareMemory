@@ -15,6 +15,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -103,6 +105,39 @@ public class DiaryServiceImpl implements DiaryService{
 
          return responseDTO;
 
+    }
+
+    @Override
+    public PageResponseDTO<DiaryDTO> listLoginUser(PageRequestDTO pageRequestDTO) {
+        Pageable pageable =
+                PageRequest.of(
+                        pageRequestDTO.getPage() - 1,
+                        pageRequestDTO.getSize(),
+                        Sort.by("dno").descending()
+                );
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        String authenticatedUserId = (authentication != null) ? authentication.getName() : null;
+
+        Page<Diary> result = diaryRepository.findByUserId(authenticatedUserId, pageable);
+
+
+        List<DiaryDTO> dtoList = result.getContent().stream()
+                .map(diary -> diary.toDTO())
+                .collect(Collectors.toList());
+
+        // 총 개수 가져오기
+        long totalCount = result.getTotalElements();
+
+        // PageResponseDTO 생성
+        PageResponseDTO<DiaryDTO> responseDTO = PageResponseDTO.<DiaryDTO>withAll()
+                .dtoList(dtoList)
+                .pageRequestDTO(pageRequestDTO)
+                .totalCount(totalCount)
+                .build();
+
+
+        return responseDTO;
     }
 
 }

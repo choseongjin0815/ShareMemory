@@ -116,5 +116,14 @@ public class DiaryController {
 
         return diaryService.list(pageRequestDTO);
     }
+
+
+    //로그인한 유저의 diary만 출력
+    @GetMapping("/list/user")
+    public PageResponseDTO<DiaryDTO> getDiaryListForUser (PageRequestDTO pageRequestDTO) {
+        log.info(pageRequestDTO);
+
+        return diaryService.listLoginUser(pageRequestDTO);
+    }
 }
 

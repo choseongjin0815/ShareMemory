@@ -5,6 +5,7 @@ import com.chobocho.ShareMemory_back_end.domain.diary.domain.Diary;
 import com.chobocho.ShareMemory_back_end.domain.user.domain.User;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import jakarta.persistence.Column;
 import lombok.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -31,6 +32,7 @@ public class DiaryDTO {
 
     private int totalView;
 
+    @Column(name="user_id")
     private String userId;
 
 

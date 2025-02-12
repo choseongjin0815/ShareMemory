@@ -16,4 +16,6 @@ public interface DiaryService {
     void modifyDiary(DiaryDTO diaryDTO);
 
     PageResponseDTO<DiaryDTO> list(PageRequestDTO pageRequestDTO);
+
+    PageResponseDTO<DiaryDTO> listLoginUser(PageRequestDTO pageRequestDTO);
 }
