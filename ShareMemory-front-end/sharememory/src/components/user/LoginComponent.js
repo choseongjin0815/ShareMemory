@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button } from "react-bootstrap";
+import { Button, Card, Form, Col, Row, Container} from "react-bootstrap";
 import useCustomLogin from "../../hooks/useCustomLogin";
 
 const initState = {
@@ -33,30 +33,60 @@ const LoginComponent = () => {
       }
 
       return (
-        <div>
-            <input
-        name="userId"
-        type={'text'} 
-        value={loginParam.userId}
-        onChange={handleChange}
-        >
-        </input>
 
-        <input  
-        name="pwd"
-        type={'password'} 
-        value={loginParam.pwd}
-        onChange={handleChange}
-        >
-        </input>
+          <Container className="d-flex justify-content-center align-items-center" 
+                style={{ minHeight: '100vh' }}>
+            <Row>
+              <Col>
+                <Card className="p-4 shadow-sm">
+                  <Card.Body>
+                    <h3 className="text-center mb-4">로그인</h3>
+                    <Form>
+                      <Form.Group className="mb-3" controlId="formEmail">
+                        <Form.Label>이메일</Form.Label>
+                        <Form.Control type="email" name="userId" value={loginParam.userId} 
+                        onChange={handleChange} placeholder="이메일 입력" />
+                      </Form.Group>
 
-        <Button 
+                      <Form.Group className="mb-3" controlId="formPassword">
+                        <Form.Label>비밀번호</Form.Label>
+                        <Form.Control type="password" name="pwd" value={loginParam.password}
+                        placeholder="비밀번호 입력" onChange={handleChange}/>
+                      </Form.Group>
+
+                      <Button variant="primary" onClick={handleClickLogin} className="w-100">
+                        로그인
+                      </Button>
+                    </Form>
+                  </Card.Body>
+                </Card>
+              </Col>
+            </Row>
+          </Container>
+        // <div>
+        //     <input
+        // name="userId"
+        // type={'text'} 
+        // value={loginParam.userId}
+        // onChange={handleChange}
+        // >
+        // </input>
+
+        // <input  
+        // name="pwd"
+        // type={'password'} 
+        // value={loginParam.pwd}
+        // onChange={handleChange}
+        // >
+        // </input>
+
+        // <Button 
             
-            onClick={handleClickLogin}  
-            >
-            LOGIN
-          </Button>
-        </div>
+        //     onClick={handleClickLogin}  
+        //     >
+        //     LOGIN
+        //   </Button>
+        // </div>
         
         
       )

@@ -1,0 +1,62 @@
+/* Header.css */
+.nav-item {
+  color: white;
+  font-size: 18px;
+  font-weight: bold; /* 글씨 두껍게 */
+  margin-right: 20px; /* 항목 간 간격 */
+  padding: 10px;
+  text-decoration: none; /* 링크의 밑줄 없애기 */
+  transition: all 0.3s ease;
+}
+
+.nav-item:hover {
+  color: #f8f9fa; /* 마우스 오버 시 색 변경 */
+  background-color: #4e4e4e;/* 배경색 추가 */
+  border-radius: 5px; /* 둥근 모서리 추가 */
+}
+
+/* 메뉴 항목들을 화면 전체의 중앙에 위치하게 설정 */
+.menu-items {
+  display: flex;
+  justify-content: center; /* 메뉴 항목들을 수평 중앙 정렬 */
+  gap: 300px; /* 메뉴 항목 사이에 일정한 간격 추가 */
+  flex-grow: 1; /* 중앙 배치를 위해 필요한 공간을 차지 */
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%); /* 화면 중앙에 정확히 위치하도록 이동 */
+}
+
+.navbar-nav {
+  display: flex;
+  justify-content: flex-start; /* 왼쪽에 메뉴 항목 배치 */
+  flex-wrap: nowrap; /* 메뉴 항목들이 줄바꿈 없이 한 줄로 정렬 */
+}
+
+.navbar-nav.right {
+  margin-left: auto; /* 오른쪽에 로그인 정보 배치 */
+  display: flex;
+  align-items: center;
+}
+
+/* 브랜드 스타일 */
+.brand-title {
+  font-family: 'Poppins', sans-serif;  /* Poppins 폰트 적용 */
+  font-size: 2rem;  /* 텍스트 크기 */
+  font-weight: 600;  /* 글자 두께 (600은 굵은 폰트) */
+  color: #c2e7ff;  /* 글자 색 (초록색) */
+
+  cursor: pointer;  /* 클릭 가능한 커서 */
+  letter-spacing: 1px;  /* 글자 사이 간격 */
+  transition: color 0.3s ease, transform 0.3s ease;  /* 색상 변경과 크기 변화를 부드럽게 애니메이션 */
+}
+
+/* 호버 효과 */
+.brand-title:hover {
+  color: #c2e7ff;  /* 마우스를 올렸을 때 색상 변경 */
+  transform: scale(1.1);  /* 텍스트 크기 약간 증가 */
+}
+
+/* 클릭 시 스타일 */
+.brand-title:active {
+  color: #c2e7ff;  /* 클릭 시 색상 */
+}
