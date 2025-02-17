@@ -1,0 +1,44 @@
+/* 애니메이션 효과 */
+@keyframes floatText {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+  
+  .animated-message {
+    animation: floatText 2s ease-in-out infinite;
+    color: #6c5ce7; /* 보라색 글씨 */
+    font-family: 'Poppins', sans-serif; /* 예쁜 글씨체 */
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* 글씨 그림자 */
+    font-weight: bold;
+    letter-spacing: 2px;
+  }
+  
+  /* 버튼 스타일 */
+  .start-button {
+    font-size: 18px;
+    font-weight: bold;
+    padding: 12px 30px;
+    border-radius: 30px;
+    background: linear-gradient(45deg, #6c5ce7, #fd79a8);
+    border: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    color: white;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .start-button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+  }
+  
+  .start-button:active {
+    transform: scale(1);
+  }

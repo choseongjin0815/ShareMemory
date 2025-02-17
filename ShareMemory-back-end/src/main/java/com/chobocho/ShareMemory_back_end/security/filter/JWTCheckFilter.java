@@ -18,6 +18,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Map;
@@ -70,8 +71,11 @@ public class JWTCheckFilter extends OncePerRequestFilter {
             String userId = (String)claims.get("userId");
             String pwd = (String)claims.get("pwd");
             String nickname = (String)claims.get("nickname");
-            LocalDate regDate = (LocalDate)claims.get("regDate");
-            UserStatus userStatus = (UserStatus)claims.get("userStatus");
+
+            String dateStr = (String)claims.get("regDate");
+            LocalDate regDate = LocalDate.parse(dateStr, DateTimeFormatter.ISO_DATE);
+
+            UserStatus userStatus = UserStatus.valueOf((String) claims.get("userStatus"));
 
             Collection<GrantedAuthority> authorities = Collections.emptyList();
 

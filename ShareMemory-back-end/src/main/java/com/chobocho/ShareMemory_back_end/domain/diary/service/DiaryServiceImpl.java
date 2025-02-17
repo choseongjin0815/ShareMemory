@@ -108,18 +108,15 @@ public class DiaryServiceImpl implements DiaryService{
     }
 
     @Override
-    public PageResponseDTO<DiaryDTO> listLoginUser(PageRequestDTO pageRequestDTO) {
+    public PageResponseDTO<DiaryDTO> listLoginUser(PageRequestDTO pageRequestDTO, String userId) {
         Pageable pageable =
                 PageRequest.of(
                         pageRequestDTO.getPage() - 1,
                         pageRequestDTO.getSize(),
                         Sort.by("dno").descending()
                 );
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-        String authenticatedUserId = (authentication != null) ? authentication.getName() : null;
-
-        Page<Diary> result = diaryRepository.findByUserId(authenticatedUserId, pageable);
+        Page<Diary> result = diaryRepository.findByUserId(userId, pageable);
 
 
         List<DiaryDTO> dtoList = result.getContent().stream()

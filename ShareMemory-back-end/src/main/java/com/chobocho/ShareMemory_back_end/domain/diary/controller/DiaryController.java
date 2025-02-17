@@ -8,6 +8,7 @@ import com.chobocho.ShareMemory_back_end.util.pagination.PageResponseDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.core.io.Resource;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -119,11 +120,11 @@ public class DiaryController {
 
 
     //로그인한 유저의 diary만 출력
-    @GetMapping("/list/user")
-    public PageResponseDTO<DiaryDTO> getDiaryListForUser (PageRequestDTO pageRequestDTO) {
+    @GetMapping("/list/{userId}")
+    public PageResponseDTO<DiaryDTO> getDiaryListForUser (PageRequestDTO pageRequestDTO, @PathVariable String userId) {
         log.info(pageRequestDTO);
 
-        return diaryService.listLoginUser(pageRequestDTO);
+        return diaryService.listLoginUser(pageRequestDTO, userId);
     }
 }
 

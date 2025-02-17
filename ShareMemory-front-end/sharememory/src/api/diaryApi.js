@@ -1,25 +1,20 @@
-import axios from "axios"
 
+import jwtAxios from "../util/jwtUtil"
 export const API_SERVER_HOST = 'http://localhost:8080'
 
 const prefix = `${API_SERVER_HOST}/api/diary`
 
-export const getList = async (pageParam) => {
+export const getUserDiaryList = async (pageParam, loginState) => {
 
-    console.log(prefix)
+    const {page,size} = pageParam
+    console.log(loginState)
+    const res = await jwtAxios.get(`${prefix}/list/${loginState.userId}`, {params: {page:page, size:size}})
 
-    const {page, size} = pageParam
+    return res.data
+}
 
-
-    console.log(pageParam)
-    console.log(`${prefix}/list`)
-
-    const res = await axios.get(`${prefix}/list`, {params : {page:page, size:size}})
-
-    
-
-    console.log(res.data)
-
+export const getDiaryDetail = async (dno) => {
+    const res = await jwtAxios.get(`${prefix}/${dno}`)
     return res.data
 }
 

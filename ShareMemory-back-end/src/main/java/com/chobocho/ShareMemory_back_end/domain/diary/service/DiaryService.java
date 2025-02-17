@@ -17,5 +17,5 @@ public interface DiaryService {
 
     PageResponseDTO<DiaryDTO> list(PageRequestDTO pageRequestDTO);
 
-    PageResponseDTO<DiaryDTO> listLoginUser(PageRequestDTO pageRequestDTO);
+    PageResponseDTO<DiaryDTO> listLoginUser(PageRequestDTO pageRequestDTO, String userId);
 }
