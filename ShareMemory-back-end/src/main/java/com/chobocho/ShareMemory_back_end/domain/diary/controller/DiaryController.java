@@ -126,5 +126,19 @@ public class DiaryController {
 
         return diaryService.listLoginUser(pageRequestDTO, userId);
     }
+
+    @GetMapping("/list/{userId}/friend")
+    public PageResponseDTO<DiaryDTO> getDiaryListForUserFriend (PageRequestDTO pageRequestDTO, @PathVariable String userId) {
+        log.info(pageRequestDTO);
+
+        return diaryService.listFriend(pageRequestDTO, userId);
+    }
+
+    @GetMapping("/list/{userId}/all")
+    public PageResponseDTO<DiaryDTO> getDiaryListForUserAndFriend (PageRequestDTO pageRequestDTO, @PathVariable String userId) {
+        log.info(pageRequestDTO);
+
+        return diaryService.listUserAndFriend(pageRequestDTO, userId);
+    }
 }
 

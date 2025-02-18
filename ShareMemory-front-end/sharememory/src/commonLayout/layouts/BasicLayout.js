@@ -36,10 +36,11 @@ const BasicLayout = ({ side, main}) => {
               paddingTop: "120px", // 헤더 공간 확보
             }}
           >
-            {main}
+          {main}
+
           </Col>
         </Row>
-      
+        
       </Container>
       <Footer />
       

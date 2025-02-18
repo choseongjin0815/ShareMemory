@@ -18,4 +18,8 @@ public interface DiaryService {
     PageResponseDTO<DiaryDTO> list(PageRequestDTO pageRequestDTO);
 
     PageResponseDTO<DiaryDTO> listLoginUser(PageRequestDTO pageRequestDTO, String userId);
+
+    PageResponseDTO<DiaryDTO> listFriend(PageRequestDTO pageRequestDTO, String userId);
+
+    PageResponseDTO<DiaryDTO> listUserAndFriend(PageRequestDTO pageRequestDTO, String userId);
 }

@@ -4,25 +4,32 @@ import { replace } from "react-router-dom";
 
 
 const Read = lazy(() => import("../pages/diary/DiaryReadPage"))
+
+const List = lazy(() => import("../pages/diary/DiaryListPage"))
 const Diary = lazy(() => import("../pages/diary/DiaryPage"))
+
 const Loading = <div>Loading.....</div>
 
 const diaryRouter = () => {
     return [
         {
-            path: "",
-            element: <Suspense fallback={Loading}><Diary/></Suspense>
+            path: "list",
+            element: <Suspense fallback={Loading}><List/></Suspense>
             
         },
         {
-            path: "list",
-            element: <Navigate replace to="/diary"/>
+            path: "",
+            element: <Navigate replace to="list"/>
         },
-
         {
             path: "read/:dno",
-            element: <Suspense fallback={Loading}><Read/></Suspense> 
+            element: <Suspense fallback={Loading}><Read/></Suspense>
         },
+
+        // {
+        //     path: "read/:dno",
+        //     element: <Suspense fallback={Loading}><Read/></Suspense> 
+        // },
         
     ];
 }

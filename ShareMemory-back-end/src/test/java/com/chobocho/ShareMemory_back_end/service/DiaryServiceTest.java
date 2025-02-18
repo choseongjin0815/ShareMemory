@@ -83,4 +83,36 @@ public class DiaryServiceTest {
     }
 
 
+    @Test
+    public void diaryListFriendTest() {
+        PageRequestDTO pageRequestDTO = new PageRequestDTO();
+
+        Pageable pageable =
+                PageRequest.of(
+                        pageRequestDTO.getPage() - 1,
+                        pageRequestDTO.getSize(),
+                        Sort.by("dno").descending()
+                );
+        Page<Diary> list = diaryRepository.findDiaryByFromUser("user1", pageable);
+
+        log.info(list);
+
+        // Diary를 DiaryDTO로 변환
+        List<DiaryDTO> dtoList = list.getContent().stream()
+                .map(diary -> diary.toDTO())
+                .collect(Collectors.toList());
+
+        // 총 개수 가져오기
+        long totalCount = list.getTotalElements();
+
+        // PageResponseDTO 생성
+        PageResponseDTO<DiaryDTO> responseDTO = PageResponseDTO.<DiaryDTO>withAll()
+                .dtoList(dtoList)
+                .pageRequestDTO(pageRequestDTO)
+                .totalCount(totalCount)
+                .build();
+
+        log.info(responseDTO);
+    }
+
 }
