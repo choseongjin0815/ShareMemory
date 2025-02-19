@@ -1,9 +1,12 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, React } from "react";
 import { getDiaryDetail } from "../../api/diaryApi";
 import '../../css/ReadComponent.css'; // 커스텀 CSS 추가
+import {API_SERVER_HOST} from "../../api/diaryApi";
 
 const ReadComponent = ({ dno }) => {
   console.log(dno);
+
+  const host = API_SERVER_HOST;
 
   const [diaryDetail, setDiaryDetail] = useState(null);
 
@@ -11,6 +14,7 @@ const ReadComponent = ({ dno }) => {
   useEffect(() => {
     getDiaryDetail(dno).then((data) => {
       setDiaryDetail(data);
+      console.log(data);
     });
   }, [dno]);
 
@@ -45,6 +49,17 @@ const ReadComponent = ({ dno }) => {
           <div className="mb-3">
             <p className="card-text diary-content">
               {diaryDetail.content}
+              {diaryDetail.uploadFileNames.map((imgFile, i) => (
+                <span key={i}>
+                  <br/>
+                  <img 
+                    alt="diary"
+                    className="p-4 w-1/2" 
+                    src={`${host}/api/diary/view/${imgFile}`}
+                  />
+                </span>
+              ))}
+              
             </p>
           </div>
         </div>

@@ -19,32 +19,33 @@ const Header = () => {
 
   return (
     <>
-      <Navbar bg="dark" variant="dark" expand="lg">
+      <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect>
         <Container>
-      
           <Navbar.Brand onClick={() => navigate("/")} className="brand-title">
             ShareMemory
           </Navbar.Brand>
 
-          {/* 중앙 메뉴 항목들 (메모리, 친구 등) */}
-          <Nav className="menu-items">
-            <Button
-              variant="link"
-              className="nav-item"
-              onClick={() => navigate("/diary")}
-            >
-              Memories
-            </Button>
-            <Button
-              variant="link"
-              className="nav-item"
-              onClick={() => navigate("/friends")}
-            >
-              Friends
-            </Button>
-          </Nav>
+          {loginState.userId && (
+            <Navbar.Collapse>
+              <Nav className="menu-items">
+                <Button
+                  variant="link"
+                  className="nav-item"
+                  onClick={() => navigate("/diary")}
+                >
+                  Memories
+                </Button>
+                <Button
+                  variant="link"
+                  className="nav-item"
+                  onClick={() => navigate("/friends")}
+                >
+                  Friends
+                </Button>
+              </Nav>
+            </Navbar.Collapse>
+          )}
 
-          {/* 오른쪽 로그인 정보 / 버튼 */}
           <Nav className="ms-auto">
             {loginState.userId ? (
               <>

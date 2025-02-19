@@ -32,3 +32,10 @@ export const getDiaryDetail = async (dno) => {
     return res.data
 }
 
+export const createDiary = async (diaryObj)=> {
+    const res = await jwtAxios.post(`${prefix}/create`, diaryObj)
+    
+    return res.data
+
+}
+

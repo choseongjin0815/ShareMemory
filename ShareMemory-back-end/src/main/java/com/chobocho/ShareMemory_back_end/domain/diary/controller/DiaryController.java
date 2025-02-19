@@ -26,9 +26,8 @@ public class DiaryController {
     private final DiaryService diaryService;
     private final CustomFileUtil customFileUtil;
 
-    @PostMapping("/")
+    @PostMapping("/create")
     public Map<String, Long> register(DiaryDTO diaryDTO) {
-        log.info("register" + diaryDTO);
         List<MultipartFile> files = diaryDTO.getFiles();
 
         List<String> uploadFileNames = customFileUtil.saveFiles(files);

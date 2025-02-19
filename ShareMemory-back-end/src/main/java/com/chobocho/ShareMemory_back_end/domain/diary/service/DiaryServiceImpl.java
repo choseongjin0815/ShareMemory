@@ -15,10 +15,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -33,6 +32,8 @@ public class DiaryServiceImpl implements DiaryService{
     @Override
     public Long register(DiaryDTO diaryDTO) {
         User user = userRepository.findById(diaryDTO.getUserId()).orElseThrow(() -> new IllegalArgumentException("user not found"));
+
+        diaryDTO.setRegDate(LocalDate.now());
 
         Diary diary = diaryDTO.dtoToEntity(user);
 

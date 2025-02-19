@@ -1,0 +1,48 @@
+/* 전체 카드 스타일 */
+.diary-card {
+    max-width: 700px;
+    width: 100%;
+    border-radius: 12px;
+    background: #ffffff;
+    padding: 30px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+}
+
+.diary-card:hover {
+    transform: translateY(-3px);
+}
+
+/* Textarea 스타일 */
+.diary-textarea {
+    min-height: 150px;
+    border-radius: 8px;
+    border: 1px solid #ced4da;
+    padding: 12px;
+    font-size: 16px;
+    resize: none;
+    box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.05);
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.diary-textarea:focus {
+    border-color: #80bdff;
+    outline: none;
+    box-shadow: 0 0 8px rgba(128, 189, 255, 0.5);
+}
+
+/* 버튼 스타일 */
+.diary-btn {
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.diary-btn:hover {
+    background-color: #0056b3;
+}
+
+.diary-btn:active {
+    transform: scale(0.95);
+}

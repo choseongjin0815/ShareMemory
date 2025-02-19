@@ -1,4 +1,4 @@
-/* Header.css */
+/* 기존 nav-item 스타일 유지 */
 .nav-item {
   color: white;
   font-size: 18px;
@@ -9,33 +9,47 @@
   transition: all 0.3s ease;
 }
 
+/* hover 효과 유지 */
 .nav-item:hover {
   color: #f8f9fa; /* 마우스 오버 시 색 변경 */
   background-color: #4e4e4e;/* 배경색 추가 */
   border-radius: 5px; /* 둥근 모서리 추가 */
 }
 
-/* 메뉴 항목들을 화면 전체의 중앙에 위치하게 설정 */
+/* 메뉴 항목들을 중앙에 위치하게 설정 */
 .menu-items {
   display: flex;
   justify-content: center; /* 메뉴 항목들을 수평 중앙 정렬 */
-  gap: 300px; /* 메뉴 항목 사이에 일정한 간격 추가 */
+  gap: 300px; /* 메뉴 항목 사이에 기본 간격 추가 */
   flex-grow: 1; /* 중앙 배치를 위해 필요한 공간을 차지 */
   position: absolute;
   left: 50%;
   transform: translateX(-50%); /* 화면 중앙에 정확히 위치하도록 이동 */
 }
 
-.navbar-nav {
-  display: flex;
-  justify-content: flex-start; /* 왼쪽에 메뉴 항목 배치 */
-  flex-wrap: nowrap; /* 메뉴 항목들이 줄바꿈 없이 한 줄로 정렬 */
+/* 화면 크기 줄어들 때 버튼들의 간격 조정 */
+@media (max-width: 1200px) {
+  .menu-items {
+    gap: 200px; /* 화면이 좁아지면 간격을 줄임 */
+  }
 }
 
-.navbar-nav.right {
-  margin-left: auto; /* 오른쪽에 로그인 정보 배치 */
-  display: flex;
-  align-items: center;
+@media (max-width: 900px) {
+  .menu-items {
+    gap: 100px; /* 화면이 더 좁아지면 간격을 더욱 줄임 */
+  }
+}
+
+@media (max-width: 700px) {
+  .menu-items {
+    gap: 50px; /* 화면이 더 좁아지면 간격을 거의 없앰 */
+  }
+}
+
+@media (max-width: 500px) {
+  .nav-item {
+    display: none; /* 화면이 너무 좁아지면 버튼 숨기기 */
+  }
 }
 
 /* 브랜드 스타일 */

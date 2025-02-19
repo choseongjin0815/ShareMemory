@@ -62,6 +62,7 @@ public class CustomSecurityConfig {
         });
 
         // UsernamePasswordAuthenticationFilter전에 JWTCheckFilter 적용
+        //REST Controller 테스트하고 싶으면 주석
         http.addFilterBefore(new JWTCheckFilter(), UsernamePasswordAuthenticationFilter.class);
 
         http.exceptionHandling(config -> {

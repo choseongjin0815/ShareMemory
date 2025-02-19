@@ -1,12 +1,13 @@
 import { Suspense, lazy } from "react";
 import { Navigate } from "react-router-dom";
-import { replace } from "react-router-dom";
+
 
 
 const Read = lazy(() => import("../pages/diary/DiaryReadPage"))
 
 const List = lazy(() => import("../pages/diary/DiaryListPage"))
-const Diary = lazy(() => import("../pages/diary/DiaryPage"))
+
+const Write = lazy(() => import("../pages/diary/DiaryWritePage"))
 
 const Loading = <div>Loading.....</div>
 
@@ -25,6 +26,11 @@ const diaryRouter = () => {
             path: "read/:dno",
             element: <Suspense fallback={Loading}><Read/></Suspense>
         },
+        {
+            path: "write",
+            element: <Suspense fallback={Loading}><Write/></Suspense>
+
+        }
 
         // {
         //     path: "read/:dno",

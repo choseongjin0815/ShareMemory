@@ -16,7 +16,10 @@ const DiarySideMenu = () => {
                     >
                         Memories
                     </ListGroup.Item>
-                    <ListGroup.Item action className="side-menu-item">
+                    <ListGroup.Item 
+                        action
+                        onClick={() => navigate('/diary/write')}
+                        className="side-menu-item">
                         Record Memory
                     </ListGroup.Item>
                     <ListGroup.Item action className="side-menu-item">

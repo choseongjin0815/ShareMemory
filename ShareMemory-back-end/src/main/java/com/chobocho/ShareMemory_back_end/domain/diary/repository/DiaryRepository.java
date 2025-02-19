@@ -17,14 +17,17 @@ public interface DiaryRepository extends JpaRepository<Diary, Long> {
 
     @Query("SELECT d FROM Diary d " +
             "INNER JOIN Friend f ON d.user.userId = f.toUserId.userId " +
-            "WHERE f.fromUserId.userId = :userId")
+            "WHERE f.fromUserId.userId = :userId " +
+            "AND f.friendStatus = 'FRIENDS' ")
     Page<Diary> findDiaryByFromUser(@Param("userId") String userId, Pageable pageable);
 
 
 
     @Query("SELECT distinct d FROM Diary d " +
             "JOIN Friend f ON (d.user.userId = f.toUserId.userId OR d.user.userId = f.fromUserId.userId) " +
-            "WHERE (f.fromUserId.userId = :userId OR f.toUserId.userId = :userId) " +
-            "OR d.user.userId = :userId ")
+            "WHERE (f.fromUserId.userId = :userId " +
+            "OR f.toUserId.userId = :userId " +
+            "OR d.user.userId = :userId)" +
+            "AND f.friendStatus = 'FRIENDS' ")
     Page<Diary> findDiaryAll(@Param("userId") String userId, Pageable pageable);
 }
