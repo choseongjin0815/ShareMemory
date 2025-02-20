@@ -21,5 +21,8 @@ public interface DiaryService {
 
     PageResponseDTO<DiaryDTO> listFriend(PageRequestDTO pageRequestDTO, String userId);
 
+    //나를 toUser로 가지고 있는 케이스
+    PageResponseDTO<DiaryDTO> listFriendToUser(PageRequestDTO pageRequestDTO, String userId);
+
     PageResponseDTO<DiaryDTO> listUserAndFriend(PageRequestDTO pageRequestDTO, String userId);
 }

@@ -133,6 +133,12 @@ public class DiaryController {
         return diaryService.listFriend(pageRequestDTO, userId);
     }
 
+    @GetMapping("/list/{userId}/toFriend")
+    public PageResponseDTO<DiaryDTO> getDiaryListToUserFriend (PageRequestDTO pageRequestDTO, @PathVariable String userId) {
+        log.info(pageRequestDTO);
+        return diaryService.listFriendToUser(pageRequestDTO, userId);
+    }
+
     @GetMapping("/list/{userId}/all")
     public PageResponseDTO<DiaryDTO> getDiaryListForUserAndFriend (PageRequestDTO pageRequestDTO, @PathVariable String userId) {
         log.info(pageRequestDTO);

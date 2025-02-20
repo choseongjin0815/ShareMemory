@@ -3,6 +3,7 @@ package com.chobocho.ShareMemory_back_end.domain.diary.domain;
 import com.chobocho.ShareMemory_back_end.domain.diary.dto.DiaryDTO;
 import com.chobocho.ShareMemory_back_end.domain.diary.service.DiaryService;
 import com.chobocho.ShareMemory_back_end.domain.user.domain.User;
+import com.chobocho.ShareMemory_back_end.util.base.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -18,7 +19,7 @@ import java.util.List;
 @Builder
 @Getter
 @Setter
-public class Diary {
+public class Diary extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long dno;

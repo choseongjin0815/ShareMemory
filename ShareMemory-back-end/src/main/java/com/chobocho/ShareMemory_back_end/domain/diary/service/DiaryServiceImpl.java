@@ -172,6 +172,32 @@ public class DiaryServiceImpl implements DiaryService{
 
 
     @Override
+    public PageResponseDTO<DiaryDTO> listFriendToUser(PageRequestDTO pageRequestDTO, String userId){
+        Pageable pageable = (
+                PageRequest.of(
+                        pageRequestDTO.getPage() - 1,
+                        pageRequestDTO.getSize(),
+                        Sort.by("dno").descending())
+                );
+         Page<Diary> result = diaryRepository.findDiaryByToUser(userId, pageable);
+
+         List<DiaryDTO> dtoList = result.getContent().stream()
+                 .map(diary -> diary.toDTO())
+                 .collect(Collectors.toList());
+
+         long totalCount = result.getTotalElements();
+
+        // PageResponseDTO 생성
+        PageResponseDTO<DiaryDTO> responseDTO = PageResponseDTO.<DiaryDTO>withAll()
+                .dtoList(dtoList)
+                .pageRequestDTO(pageRequestDTO)
+                .totalCount(totalCount)
+                .build();
+
+        return responseDTO;
+    }
+
+    @Override
     public PageResponseDTO<DiaryDTO> listUserAndFriend(PageRequestDTO pageRequestDTO, String userId) {
         Pageable pageable =
                 PageRequest.of(

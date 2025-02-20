@@ -22,7 +22,12 @@ public class QDiary extends EntityPathBase<Diary> {
 
     public static final QDiary diary = new QDiary("diary");
 
+    public final com.chobocho.ShareMemory_back_end.util.base.QBaseEntity _super = new com.chobocho.ShareMemory_back_end.util.base.QBaseEntity(this);
+
     public final StringPath content = createString("content");
+
+    //inherited
+    public final DateTimePath<java.time.LocalDateTime> created_at = _super.created_at;
 
     public final NumberPath<Long> dno = createNumber("dno", Long.class);
 
@@ -33,6 +38,9 @@ public class QDiary extends EntityPathBase<Diary> {
     public final StringPath title = createString("title");
 
     public final NumberPath<Integer> totalView = createNumber("totalView", Integer.class);
+
+    //inherited
+    public final DateTimePath<java.time.LocalDateTime> updated_at = _super.updated_at;
 
     public final com.chobocho.ShareMemory_back_end.domain.user.domain.QUser user;
 
