@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getUserDiaryList, getFriendDiaryList, getUserAndFriendDiaryList } from "../../api/diaryApi";
+import { getUserDiaryList, getFriendDiaryList, getUserAndFriendDiaryList, getFriendToUserDiaryList } from "../../api/diaryApi";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
@@ -19,7 +19,7 @@ const ListComponent = () => {
     const loginState = useSelector((state) => state.loginSlice);
     const [diaryType, setDiaryType] = useState("user");
     const [serverData, setServerData] = useState(initState);
-    const [page, setPage] = useState(1); // 📌 현재 페이지 상태 관리
+    const [page, setPage] = useState(1); // 현재 페이지 상태 
     const size = 7;
 
     useEffect(() => {
@@ -31,8 +31,14 @@ const ListComponent = () => {
             case "user":
               data = await getUserDiaryList({ page, size }, loginState);
               break;
+
             case "friend":
               data = await getFriendDiaryList({ page, size }, loginState);
+
+              // 친구 요청을 받고 승낙한 계정으로 로그인 할 시
+              if (data.dtoList == '') {
+                data = await getFriendToUserDiaryList({page, size}, loginState);
+              }
               break;
             case "all":
               data = await getUserAndFriendDiaryList({ page, size }, loginState);
@@ -127,7 +133,7 @@ const ListComponent = () => {
           <p>Loading...</p> // 데이터가 없으면 로딩 메시지 표시
         )}
 
-        {/* 📌 페이징 네비게이션 */}
+        {/* 페이징 */}
         <nav aria-label="Page navigation" className="mt-4">
           <ul className="pagination justify-content-center">
             {/* 이전 버튼 */}

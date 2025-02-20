@@ -103,7 +103,7 @@
   }
   
   .back-button {
-    background: #ff6b6b;
+    background: #067aff;
     color: white;
     border: none;
     border-radius: 50px;
@@ -113,7 +113,48 @@
   }
   
   .back-button:hover {
-    background: #ff4757;
+    background: #4db3f7;
     box-shadow: 0 12px 20px rgba(255, 71, 87, 0.4);
     transform: translateY(-3px);
   }
+
+
+  .button-group {
+    float: right;
+    display: flex;
+    gap: 20px;
+  }
+
+.edit-button, .delete-button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.edit-button {
+  background: #4CAF50;
+  color: white;
+  box-shadow: 0 8px 15px rgba(76, 175, 80, 0.3);
+}
+
+.edit-button:hover {
+  background: #43A047;
+  box-shadow: 0 12px 20px rgba(67, 160, 71, 0.4);
+  transform: translateY(-2px);
+}
+
+.delete-button {
+  background: #ff6b6b;
+  color: white;
+  box-shadow: 0 8px 15px rgba(255, 107, 107, 0.3);
+}
+
+.delete-button:hover {
+  background: #ff4757;
+  box-shadow: 0 12px 20px rgba(255, 71, 87, 0.4);
+  transform: translateY(-2px);
+}

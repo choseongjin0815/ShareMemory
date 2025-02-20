@@ -1,12 +1,18 @@
 import { useState, useEffect, React } from "react";
-import { getDiaryDetail } from "../../api/diaryApi";
+import { useNavigate } from "react-router-dom";
+import { getDiaryDetail, deleteDiary } from "../../api/diaryApi";
 import '../../css/ReadComponent.css'; // 커스텀 CSS 추가
 import {API_SERVER_HOST} from "../../api/diaryApi";
+import { useSelector } from "react-redux";
 
 const ReadComponent = ({ dno }) => {
   console.log(dno);
 
   const host = API_SERVER_HOST;
+  
+  const navigate = useNavigate();
+
+  const loginState = useSelector((state) => state.loginSlice);
 
   const [diaryDetail, setDiaryDetail] = useState(null);
 
@@ -18,6 +24,26 @@ const ReadComponent = ({ dno }) => {
     });
   }, [dno]);
 
+  //이전 페이지로 이동
+  const handleBack = () => {
+    navigate(-1);
+  }
+  //수정 페이지로 이동
+  const handleEdit = (dno) => {
+    navigate(`/diary/modify/${dno}`)
+  };
+
+  //삭제 페이지로 이동
+  const handleDelete = () => {
+    if (window.confirm("정말 삭제하시겠습니까?")) {
+      deleteDiary(dno).then((data) =>{
+        console.log(data);
+        handleBack();
+      })
+    }
+  };
+
+
   // 로딩 중일 때 표시할 텍스트
   if (!diaryDetail) {
     return <div className="text-center text-secondary mt-5">로딩 중...</div>;
@@ -25,13 +51,22 @@ const ReadComponent = ({ dno }) => {
 
   return (
     <div className="container mt-5 read-component">
-      {/* 일기 내용 카드 */}
+      
       <div className="card shadow-lg rounded-3 border-0 mb-5 diary-card">
         <div className="card-body">
-          <h3 className="card-title mb-4 fw-bold diary-title">
-            {diaryDetail.title}
-          </h3>
+        <h3 className="card-title mb-4 fw-bold diary-title">
+          {diaryDetail.title}
 
+          {/* 나의 diary만 수정 삭제 가능 */}
+          {loginState.userId === diaryDetail.userId ? ( 
+            <div className="button-group">
+            <button className="edit-button" onClick={() => handleEdit(diaryDetail.dno)}>수정</button>
+            <button className="delete-button" onClick={() => handleDelete(diaryDetail.dno)}>삭제</button>
+          </div>
+            )
+            : <></>
+          }   
+        </h3>
           <div className="row mb-3 diary-meta">
             <div className="col-md-6">
               <h6 className="text-muted">
@@ -69,7 +104,7 @@ const ReadComponent = ({ dno }) => {
       <div className="text-center">
         <button 
           className="btn btn-outline-secondary px-4 py-2 rounded-pill shadow-sm back-button"
-          onClick={() => window.history.back()}
+          onClick={handleBack}
         >
           ← 돌아가기
         </button>
