@@ -52,6 +52,15 @@ export const deleteDiary = async (dno) => {
     return res.data;
 }
 
-export const modifyDiary = async (dno) => {
-    const res = await jwtAxios.put(`${prefix}/${dno}`);
+export const modifyDiary = async (dno, diaryObj) => {
+    const res = await jwtAxios.put(`${prefix}/${dno}`, diaryObj);
+}
+
+export const getFile = async(fileName) => {
+    const res = await jwtAxios.get(`${prefix}/view/${fileName}`)
+    
+    console.log(res);
+    
+    
+    return res.status;
 }

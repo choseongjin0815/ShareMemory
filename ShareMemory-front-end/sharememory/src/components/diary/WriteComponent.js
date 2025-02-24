@@ -43,10 +43,11 @@ const WriteComponent = () => {
 
         createDiary(formData).then(data => {
             console.log(data);
+            alert("일기 등록 완료!");
+            navigate("/diary/list");
         });
 
-        alert("일기 등록 완료!");
-        navigate("/diary/list");
+        
     };
 
     return (

@@ -5,7 +5,6 @@ import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import net.coobird.thumbnailator.Thumbnails;
-import org.apache.tomcat.util.file.ConfigurationSource;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
@@ -13,7 +12,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -81,9 +79,9 @@ public class CustomFileUtil {
     //파일 가져오기
     public ResponseEntity<Resource> getFile(String fileName) {
         Resource resource = new FileSystemResource(uploadPath+ File.separator + fileName);
-
         if(!resource.exists()) {
-            resource = new FileSystemResource(uploadPath+ File.separator + "default.jpg");
+            return ResponseEntity.noContent().build();
+            //resource = new FileSystemResource(uploadPath+ File.separator + "default.jpg");
         }
         HttpHeaders headers = new HttpHeaders();
 

@@ -20,7 +20,7 @@ const ListComponent = () => {
     const [diaryType, setDiaryType] = useState("user");
     const [serverData, setServerData] = useState(initState);
     const [page, setPage] = useState(1); // 현재 페이지 상태 
-    const size = 7;
+    const size = 5;
 
     useEffect(() => {
       const fetchData = async () => {
@@ -96,7 +96,7 @@ const ListComponent = () => {
             <div
               className="card mb-4 shadow-lg rounded-3"
               key={diary.dno}
-              style={{ border: "1px solid #ddd", height: "48px", lineHeight: "48px" }}
+              style={{ border: "1px solid #ddd", height: "60px", lineHeight: "60px" }}
             >
               <div className="card-body">
                 <div className="row align-items-center">

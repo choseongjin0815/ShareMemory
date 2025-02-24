@@ -2,7 +2,7 @@ import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import Header from "../header/menus/Header";
 import Footer from "../footer/footer";
-
+import "../../css/BasicLayout.css"
 
 const BasicLayout = ({ side, main }) => {
   return (
@@ -24,8 +24,6 @@ const BasicLayout = ({ side, main }) => {
             
                 backgroundColor: "#f8f9fa", // 사이드 메뉴 배경색
                 boxShadow: "2px 0 5px rgba(0, 0, 0, 0.1)", // 그림자 효과
-                zIndex: "1000", // 다른 요소 위에 나타나도록
-                overflowY: "auto", // 내용이 넘치면 세로 스크롤
               }}
           >
             {side}

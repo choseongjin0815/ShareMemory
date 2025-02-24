@@ -91,7 +91,7 @@ public class JWTCheckFilter extends OncePerRequestFilter {
             // 객체는 사용자의 인증 정보를 담고 있는 객체로, 인증과 권한 정보를 포함하여 Spring Security에서 인증을 처리하는 데 사용
             UsernamePasswordAuthenticationToken authenticationToken =
                     new UsernamePasswordAuthenticationToken(userDTO, pwd, userDTO.getAuthorities());
-
+            log.info(authenticationToken);
 
             //인증 토큰(authenticationToken)을 SecurityContext에 설정하여, 현재 요청에서 인증된 사용자 정보를 유지
             SecurityContextHolder.getContext().setAuthentication(authenticationToken);

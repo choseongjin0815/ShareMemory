@@ -22,13 +22,19 @@ public class QComment extends EntityPathBase<Comment> {
 
     public static final QComment comment = new QComment("comment");
 
+    public final com.chobocho.ShareMemory_back_end.util.base.QBaseEntity _super = new com.chobocho.ShareMemory_back_end.util.base.QBaseEntity(this);
+
     public final NumberPath<Long> cno = createNumber("cno", Long.class);
 
     public final StringPath content = createString("content");
 
+    //inherited
+    public final DateTimePath<java.time.LocalDateTime> created_at = _super.created_at;
+
     public final com.chobocho.ShareMemory_back_end.domain.diary.domain.QDiary diary;
 
-    public final DatePath<java.time.LocalDate> regDate = createDate("regDate", java.time.LocalDate.class);
+    //inherited
+    public final DateTimePath<java.time.LocalDateTime> updated_at = _super.updated_at;
 
     public final com.chobocho.ShareMemory_back_end.domain.user.domain.QUser userId;
 
