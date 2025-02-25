@@ -35,9 +35,9 @@ public class CommentController {
     @GetMapping("/{dno}")
     public ResponseEntity<PageResponseDTO<CommentDTO>> listAllComment(PageRequestDTO pageRequestDTO
             , @PathVariable Long dno){
+        log.info(dno);
         PageResponseDTO<CommentDTO> commentDTOs = commentService.listAllComment(pageRequestDTO, dno);
-
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(commentDTOs);
 
     }
 

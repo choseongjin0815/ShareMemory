@@ -35,12 +35,15 @@ public class Comment extends BaseEntity {
     private String content;
 
 
+
+
     public CommentDTO toDTO() {
         CommentDTO commentDTO = CommentDTO.builder()
                 .cno(cno)
                 .content(content)
                 .dno(diary.getDno())
                 .userId(userId.getUserId())
+                .createdAt(getCreated_at())
                 .build();
 
         return commentDTO;
