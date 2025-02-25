@@ -19,11 +19,19 @@ public class QUser extends EntityPathBase<User> {
 
     public static final QUser user = new QUser("user");
 
+    public final com.chobocho.ShareMemory_back_end.util.base.QBaseEntity _super = new com.chobocho.ShareMemory_back_end.util.base.QBaseEntity(this);
+
+    //inherited
+    public final DateTimePath<java.time.LocalDateTime> created_at = _super.created_at;
+
     public final StringPath nickname = createString("nickname");
 
     public final StringPath pwd = createString("pwd");
 
     public final DatePath<java.time.LocalDate> regDate = createDate("regDate", java.time.LocalDate.class);
+
+    //inherited
+    public final DateTimePath<java.time.LocalDateTime> updated_at = _super.updated_at;
 
     public final StringPath userId = createString("userId");
 
