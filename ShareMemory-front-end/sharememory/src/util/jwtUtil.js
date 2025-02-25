@@ -77,6 +77,8 @@ const beforeRes = async (res) => {
 
     originalRequest.headers.Authorization = `Bearer ${result.accessToken}`
 
+    console.log("orginalRequest.headers.Authorization : ", originalRequest.headers.Authorization);
+
     return await axios(originalRequest)
 
   }

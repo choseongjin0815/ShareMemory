@@ -5,6 +5,7 @@ import '../../css/ReadComponent.css'; // 커스텀 CSS 추가
 import {API_SERVER_HOST} from "../../api/diaryApi";
 import { useSelector } from "react-redux";
 import WriteCommentComponent from "../ comment/WriteCommentComponent";
+import ListCommentComponent from "../ comment/ListCommentComponent";
 
 const ReadComponent = ({ dno }) => {
   console.log(dno);
@@ -100,6 +101,7 @@ const ReadComponent = ({ dno }) => {
           </div>
         </div>
       </div>
+      <ListCommentComponent dno={dno}/>
       <WriteCommentComponent dno={dno}/>       
       {/* 뒤로 가기 버튼 */}
       <div className="text-center">

@@ -11,6 +11,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -28,6 +29,7 @@ public class CommentDTO {
 
     private String content;
 
+    private LocalDateTime createdAt;
 
 
 }

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import { writeComment} from "../../api/commentApi";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { useNavigate } from "react-router-dom";
 
 const initState = {
     userId: '',
@@ -11,7 +12,8 @@ const initState = {
 
 const WriteCommentComponent = ({ dno }) => {
     const loginState = useSelector((state) => state.loginSlice);
-    const [comment, setComment] = useState({ ...initState, userId : loginState.userId });
+    const navigate = useNavigate();
+    const [comment, setComment] = useState({ ...initState, userId : loginState.userId, dno : dno });
 
     // 댓글 작성 핸들러
     const handleCommentChange = (e) => {
@@ -25,21 +27,21 @@ const WriteCommentComponent = ({ dno }) => {
     // 댓글 제출 핸들러
     const handleSubmit = () => {
         // 로그인된 사용자 정보로 userId 및 dno 설정
-        const updatedComment = {
-            ...comment,
-            userId: loginState.userId,
-            dno: dno
-        };
+        
 
-        console.log("submit", updatedComment);
+        const formData = new FormData();
+
+        formData.append("userId", comment.userId);
+        formData.append("dno", comment.dno);
+        formData.append("content", comment.content);
 
         // 댓글 작성 API 호출
-        writeComment(updatedComment).then((data) => {
-            console.log(data);
+        writeComment(formData).then((data) => {
             // 성공 후 처리 (예: 댓글 목록 갱신)
             alert('댓글 등록 완료');
             // 입력 필드 초기화
             setComment({ ...initState });
+            navigate(0);
         }).catch((error) => {
             console.error('댓글 등록 실패:', error);
         });
