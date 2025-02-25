@@ -52,7 +52,8 @@ const ListCommentComponent = ({ dno }) => {
             navigate(0); // 페이지 새로 고침
         } catch (err) {
             console.error("댓글 삭제 실패:", err);
-            alert('댓글 삭제에 실패했습니다.');
+            alert('댓글 삭제에 실패했습니다..');
+            
         }
     };
 
