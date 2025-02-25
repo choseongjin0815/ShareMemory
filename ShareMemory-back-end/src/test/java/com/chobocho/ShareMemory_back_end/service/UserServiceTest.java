@@ -4,6 +4,7 @@ import com.chobocho.ShareMemory_back_end.domain.user.domain.User;
 import com.chobocho.ShareMemory_back_end.domain.user.domain.UserStatus;
 import com.chobocho.ShareMemory_back_end.domain.user.dto.UserDTO;
 import com.chobocho.ShareMemory_back_end.domain.user.service.UserService;
+import com.chobocho.ShareMemory_back_end.util.pagination.PageRequestDTO;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,4 +43,8 @@ public class UserServiceTest {
         userService.register(userDTO);
     }
 
+    @Test
+    public void testUserList() {
+        log.info(userService.getUserList(new PageRequestDTO(), "user1"));
+    }
 }
