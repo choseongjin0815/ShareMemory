@@ -1,123 +1,134 @@
 import { useState, useEffect } from "react";
-import { getUserList } from "../../api/friendsApi";
+import { getUserList, friendRequest } from "../../api/friendsApi";
 import { useSelector } from "react-redux";
-
+import { useNavigate } from "react-router-dom";
 
 const initState = {
-    dtoList: [],
-    pageNumList: [],
-    prev: false,
-    next: false,
-    totalCount: 0,
-    prevPage: 0,
-    nextPage: 0,
-    totalPage: 0,
-    current: 1, // 현재 페이지
+  dtoList: [],
+  pageNumList: [],
+  prev: false,
+  next: false,
+  totalCount: 0,
+  prevPage: 0,
+  nextPage: 0,
+  totalPage: 0,
+  current: 1, // 현재 페이지
 };
 
 const ListUserComponent = () => {
-    const loginState = useSelector((state) => state.loginSlice);
-    const [serverData, setServerData] = useState(initState);
-    const [page, setPage] = useState(1); // 현재 페이지 상태 
-    const size = 5;
+  const loginState = useSelector((state) => state.loginSlice);
+  const navigate = useNavigate();
+  const [serverData, setServerData] = useState(initState);
+  const [page, setPage] = useState(1); // 현재 페이지 상태
+  const size = 5;
 
-    useEffect(() => {
-      const fetchData = async () => {
-        let data;
-        try {
-              data = await getUserList({ page, size }, loginState);
-          setServerData({
-            ...data,
-            current: data.current || page,
-          });
-        } catch (error) {
-          console.error("Error fetching data:", error);
-        }
-      };
-      fetchData();
-  }, [page, loginState]); 
-
-
-    const handlePageChange = (pageNum) => {
-      setPage(pageNum);
+  useEffect(() => {
+    const fetchData = async () => {
+      let data;
+      try {
+        data = await getUserList({ page, size }, loginState);
+        setServerData({
+          ...data,
+          current: data.current || page,
+        });
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
     };
+    fetchData();
+  }, [page, loginState]);
+
+  const handleClickRequest = (toUserId, fromUserId) => {
+    friendRequest(toUserId, fromUserId).then(()=>{
+      alert("친구 신청 완료");
+      navigate(0);
+    })
+  }
+
+  const handlePageChange = (pageNum) => {
+    setPage(pageNum);
+  };
 
   return (
-      <div className="container mt-4">
-        {/* 게시글 목록 */}
-        {serverData.dtoList.length > 0 ? (
-          serverData.dtoList.map((user) => (
-            <div
-              className="card mb-4 shadow-lg rounded-3"
-              key={user.userId}
-              style={{ border: "1px solid #ddd", height: "60px", lineHeight: "60px" }}
-            >
-              <div className="card-body">
-                <div className="row align-items-center">
-              
-                  <div className="col-8">
-                    <h5 className="card-title mb-0" style={{ fontSize: "1.2rem", fontWeight: "bold" }}>
-                      <div
-                        
-                        className="card-link text-decoration-none text-dark"
-                      >
-                        {user.nickname}
-                      </div>
-                    </h5>
-                  </div>                
+    <div className="container mt-4">
+      {/* 게시글 목록 */}
+      {serverData.dtoList.length > 0 ? (
+        serverData.dtoList.map((user) => (
+          <div
+            className="card mb-4 shadow-lg rounded-3"
+            key={user.userId}
+            style={{ border: "1px solid #ddd", height: "60px", lineHeight: "60px" }}
+          >
+            <div className="card-body">
+              <div className="row align-items-center">
+                <div className="col-9"> {/* 사람 이름을 오른쪽으로 이동 */}
+                  <h5 className="card-title mb-0" style={{ fontSize: "1.2rem", fontWeight: "bold" }}>
+                    <div className="card-link text-decoration-none text-dark">
+                      {user.nickname}
+                    </div>
+                  </h5>
+                </div>
+                <div className="col-3 text-end"> 
+                  <button 
+                    className="btn btn-primary"
+                    onClick={() => handleClickRequest(user.userId, loginState.userId)}
+                    >
+                    친구 신청
+                  </button>
                 </div>
               </div>
             </div>
-          ))
-        ) : (
-          <p>Loading...</p> // 데이터가 없으면 로딩 메시지 표시
-        )}
+          </div>
+        ))
+      ) : (
+        <p>Loading...</p> // 데이터가 없으면 로딩 메시지 표시
+      )}
 
-        {/* 페이징 */}
-        <nav aria-label="Page navigation" className="mt-4">
-          <ul className="pagination justify-content-center">
-            {/* 이전 버튼 */}
-            {serverData.prev && (
-              <li className="page-item">
-                <button
-                  className="page-link"
-                  onClick={() => handlePageChange(serverData.prevPage)}
-                >
-                  이전
-                </button>
-              </li>
-            )}
-
-            {/* 페이지 번호 */}
-            {serverData.pageNumList.map((pageNum) => (
-              <li
-                className={`page-item ${pageNum === page ? "active" : ""}`}
-                key={pageNum}
+      {/* 페이징 */}
+      <nav aria-label="Page navigation" className="mt-4">
+        <ul className="pagination justify-content-center">
+          {/* 이전 버튼 */}
+          {serverData.prev && (
+            <li className="page-item">
+              <button
+                className="page-link"
+                onClick={() => handlePageChange(serverData.prevPage)}
               >
-                <button
-                  className="page-link"
-                  onClick={() => handlePageChange(pageNum)}
-                >
-                  {pageNum}
-                </button>
-              </li>
-            ))}
+                이전
+              </button>
+            </li>
+          )}
 
-            {/* 다음 버튼 */}
-            {serverData.next && (
-              <li className="page-item">
-                <button
-                  className="page-link"
-                  onClick={() => handlePageChange(serverData.nextPage)}
-                >
-                  다음
-                </button>
-              </li>
-            )}
-          </ul>
-        </nav>
-      </div>
-    );
+          {/* 페이지 번호 */}
+          {serverData.pageNumList.map((pageNum) => (
+            <li
+              className={`page-item ${pageNum === page ? "active" : ""}`}
+              key={pageNum}
+            >
+              <button
+                className="page-link"
+                onClick={() => handlePageChange(pageNum)}
+              >
+                {pageNum}
+              </button>
+            </li>
+          ))}
+
+          {/* 다음 버튼 */}
+          {serverData.next && (
+            <li className="page-item">
+              <button
+                className="page-link"
+                onClick={() => handlePageChange(serverData.nextPage)}
+              >
+                다음
+              </button>
+            </li>
+          )}
+        </ul>
+      </nav>
+    </div>
+  );
 };
 
 export default ListUserComponent;

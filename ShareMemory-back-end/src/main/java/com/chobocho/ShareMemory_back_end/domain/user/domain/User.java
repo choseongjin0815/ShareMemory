@@ -1,16 +1,12 @@
 package com.chobocho.ShareMemory_back_end.domain.user.domain;
-
 import com.chobocho.ShareMemory_back_end.domain.user.dto.UserDTO;
 import com.chobocho.ShareMemory_back_end.util.base.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
-
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
 
 @Entity
 @Table(name="tbl_user")
@@ -19,7 +15,7 @@ import java.util.List;
 @Getter
 @ToString
 @Builder
-@Data
+@Setter
 public class User extends BaseEntity {
     @Id
     private String userId;
@@ -32,8 +28,6 @@ public class User extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
     private UserStatus userStatus;
-
-
 
     public UserDTO entityToDTO() {
 

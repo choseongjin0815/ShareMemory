@@ -84,4 +84,55 @@ public class UserServiceImpl implements UserService{
 
 
     }
+
+    @Override
+    public PageResponseDTO<UserDTO> getNotFriendsUserList(PageRequestDTO pageRequestDTO, String userId) {
+        Pageable pageable =
+                PageRequest.of(
+                        pageRequestDTO.getPage() - 1,
+                        pageRequestDTO.getSize(),
+                        Sort.by("nickname").descending()
+                );
+        Page<User> result = userRepository.findByUserIdNotFriends(userId, pageable);
+
+        List<UserDTO> dtoList = result.getContent().stream()
+                .map(user -> user.entityToDTO())
+                .collect(Collectors.toList());
+
+        long totalCount = result.getTotalElements();
+
+        PageResponseDTO<UserDTO> responseDTO = PageResponseDTO.<UserDTO>withAll()
+                .dtoList(dtoList)
+                .pageRequestDTO(pageRequestDTO)
+                .totalCount(totalCount)
+                .build();
+
+        return responseDTO;
+    }
+
+    @Override
+    public PageResponseDTO<UserDTO> getFriendList(PageRequestDTO pageRequestDTO, String userId) {
+        log.info(userId);
+        Pageable pageable =
+                PageRequest.of(
+                        pageRequestDTO.getPage() - 1,
+                        pageRequestDTO.getSize(),
+                        Sort.by("nickname").descending()
+                );
+        Page<User> result = userRepository.findByUserIdFriends(userId, pageable);
+
+        List<UserDTO> dtoList = result.getContent().stream()
+                .map(user -> user.entityToDTO())
+                .collect(Collectors.toList());
+
+        long totalCount = result.getTotalElements();
+
+        PageResponseDTO<UserDTO> responseDTO = PageResponseDTO.<UserDTO>withAll()
+                .dtoList(dtoList)
+                .pageRequestDTO(pageRequestDTO)
+                .totalCount(totalCount)
+                .build();
+
+        return responseDTO;
+    }
 }

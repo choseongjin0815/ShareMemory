@@ -47,4 +47,9 @@ public class UserServiceTest {
     public void testUserList() {
         log.info(userService.getUserList(new PageRequestDTO(), "user1"));
     }
+
+    @Test
+    public void testUserNotFriendsList() {
+        log.info(userService.getNotFriendsUserList(new PageRequestDTO(), "user1"));
+    }
 }

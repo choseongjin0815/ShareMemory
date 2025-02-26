@@ -16,8 +16,13 @@ public interface UserService {
 
     void modifyNickname(UserDTO userDTO);
 
+    //나 제외 유저 목록 출력
     PageResponseDTO<UserDTO> getUserList(PageRequestDTO pageRequestDTO, String userId);
 
+    //나와 친구 제외 유저 목록 출력
+    PageResponseDTO<UserDTO> getNotFriendsUserList(PageRequestDTO pageRequestDTO, String userId);
 
+    //친구 목록만 출력
+    PageResponseDTO<UserDTO> getFriendList(PageRequestDTO pageRequestDTO, String userId);
 
 }

@@ -17,12 +17,15 @@ const FriendsSideMenu = () => {
                     </ListGroup.Item>
                     <ListGroup.Item 
                         action
-                        onClick={() => navigate('/friends/write')}
+                        onClick={() => navigate('/friends/friendList')}
                         className="side-menu-item">
                         친구 목록
                     </ListGroup.Item>
-                    <ListGroup.Item action className="side-menu-item">
-                        친구 요청
+                    <ListGroup.Item 
+                        action 
+                        onClick={() => navigate('/friends/request')}
+                        className="side-menu-item">
+                        친구 요청 목록
                     </ListGroup.Item>
                 </ListGroup>
             </Card.Body>

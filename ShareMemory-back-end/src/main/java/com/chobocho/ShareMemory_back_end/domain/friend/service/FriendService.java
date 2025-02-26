@@ -16,4 +16,6 @@ public interface FriendService {
     Map<String, String> deniedFriendRequest(Long friendId);
 
 
+
+
 }

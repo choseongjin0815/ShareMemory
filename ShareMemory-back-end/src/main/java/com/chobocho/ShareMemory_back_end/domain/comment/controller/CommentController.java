@@ -38,7 +38,6 @@ public class CommentController {
         log.info(dno);
         PageResponseDTO<CommentDTO> commentDTOs = commentService.listAllComment(pageRequestDTO, dno);
         return ResponseEntity.ok(commentDTOs);
-
     }
 
 
