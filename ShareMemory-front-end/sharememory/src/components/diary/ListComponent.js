@@ -65,6 +65,7 @@ const ListComponent = () => {
 
     const handlePageChange = (pageNum) => {
       setPage(pageNum);
+      
     };
 
   return (
