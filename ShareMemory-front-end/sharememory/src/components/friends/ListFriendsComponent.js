@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
-import { getUserDiaryList, getFriendDiaryList, getUserAndFriendDiaryList, getFriendToUserDiaryList } from "../../api/diaryApi";
+import { getFriendList } from "../../api/friendsApi";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 
 const initState = {
     dtoList: [],
@@ -15,9 +14,9 @@ const initState = {
     current: 1, // 현재 페이지
 };
 
-const ListComponent = () => {
+const ListFriendsComponent = () => {
     const loginState = useSelector((state) => state.loginSlice);
-    const [diaryType, setDiaryType] = useState("user");
+    console.log(loginState.userId);
     const [serverData, setServerData] = useState(initState);
     const [page, setPage] = useState(1); // 현재 페이지 상태 
     const size = 5;
@@ -26,28 +25,7 @@ const ListComponent = () => {
       const fetchData = async () => {
         let data;
         try {
-          // 다이어리 타입에 따라 API 호출
-          switch (diaryType) {
-            case "user":
-              data = await getUserDiaryList({ page, size }, loginState);
-              break;
-
-            case "friend":
-              data = await getFriendDiaryList({ page, size }, loginState);
-
-              // 친구 요청을 받고 승낙한 계정으로 로그인 할 시
-              if (data.dtoList == '') {
-                data = await getFriendToUserDiaryList({page, size}, loginState);
-              }
-              break;
-            case "all":
-              data = await getUserAndFriendDiaryList({ page, size }, loginState);
-              break;
-            default:
-              data = await getUserDiaryList({ page, size }, loginState);
-          }
-        
-          // API에서 데이터를 받은 후 상태 업데이트
+              data = await getFriendList({ page, size }, loginState);
           setServerData({
             ...data,
             current: data.current || page,
@@ -57,75 +35,35 @@ const ListComponent = () => {
         }
       };
       fetchData();
-  }, [page, diaryType, loginState]); 
+  }, [page, loginState]); 
 
-    useEffect(() => {
-      setPage(1);
-    },[diaryType]);
 
     const handlePageChange = (pageNum) => {
       setPage(pageNum);
-      
     };
 
   return (
       <div className="container mt-4">
-        <div className="btn-group mb-4" role="group" aria-label="Diary type selection">
-          <button
-            className="btn btn-outline-primary"
-            onClick={() => setDiaryType("user")}
-          >
-            My Memories
-          </button>
-          <button
-            className="btn btn-outline-primary"
-            onClick={() => setDiaryType("friend")}
-          >
-            Friend's Memories
-          </button>
-          <button
-            className="btn btn-outline-primary"
-            onClick={() => setDiaryType("all")}
-          >
-            All Memories
-          </button>
-        </div>
-
         {/* 게시글 목록 */}
         {serverData.dtoList.length > 0 ? (
-          serverData.dtoList.map((diary) => (
+          serverData.dtoList.map((user) => (
             <div
               className="card mb-4 shadow-lg rounded-3"
-              key={diary.dno}
+              key={user.userId}
               style={{ border: "1px solid #ddd", height: "60px", lineHeight: "60px" }}
             >
               <div className="card-body">
                 <div className="row align-items-center">
-                  {/* 제목 */}
+              
                   <div className="col-8">
                     <h5 className="card-title mb-0" style={{ fontSize: "1.2rem", fontWeight: "bold" }}>
-                      <Link
-                        to={`/diary/read/${diary.dno}`}
+                      <div
                         className="card-link text-decoration-none text-dark"
                       >
-                        {diary.title}
-                      </Link>
+                        {user.nickname}
+                      </div>
                     </h5>
-                  </div>
-
-                  {/* 작성자 */}
-                  <div className="col-2 text-center">
-                    <h6 className="card-subtitle mb-2 text-muted" style={{ fontSize: "1rem" }}>
-                      {diary.userId}
-                    </h6>
-                  </div>
-
-                  {/* 작성일 */}
-                  <div className="col-2 text-center">
-                    <small className="text-muted" style={{ fontSize: "0.9rem" }}>
-                      {diary.regDate}
-                    </small>
-                  </div>
+                  </div>                
                 </div>
               </div>
             </div>
@@ -179,6 +117,6 @@ const ListComponent = () => {
         </nav>
       </div>
     );
-};
+}
 
-export default ListComponent;
+export default ListFriendsComponent;

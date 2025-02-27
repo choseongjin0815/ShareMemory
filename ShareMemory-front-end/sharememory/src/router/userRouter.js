@@ -3,7 +3,6 @@ import { Suspense, lazy } from "react";
 
 const Login = lazy(() => import("../pages/user/LoginPage"))
 
-
 const Loading = <div>Loading.....</div>
 
 const userRouter = () => {
@@ -11,7 +10,8 @@ const userRouter = () => {
         {
             path: "login",
             element: <Suspense fallback={Loading}><Login/></Suspense> 
-        }
+        },
+       
     ]
 }
 

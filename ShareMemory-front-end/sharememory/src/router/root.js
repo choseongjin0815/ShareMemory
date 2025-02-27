@@ -4,12 +4,14 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import userRouter from "./userRouter";
 import diaryRouter from "./diaryRouter";
+import friendsRouter from "./friendsRouter";
 
 const { createBrowserRouter } = require("react-router-dom");
 
 const Main = lazy(() => import("../pages/MainPage"));
 const Diary = lazy(() => import("../pages/diary/DiaryPage"));
 
+const Friends = lazy(() => import("../pages/friends/FriendsPage"));
 const Loading = <div>Loading.....</div>;
 
 const RootRouter = () => {
@@ -54,7 +56,12 @@ const root = createBrowserRouter([
   },
   {
     path: "friends",
-    // 친구 관련 페이지 추가 가능
+    element: 
+      <Suspense fallback={Loading}>
+        <Friends/>
+      </Suspense>
+    ,
+    children: friendsRouter()
   },
 ]);
 
